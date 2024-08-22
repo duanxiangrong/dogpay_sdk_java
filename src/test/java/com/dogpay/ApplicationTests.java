@@ -10,6 +10,7 @@ import com.dogpay.sdk.DogPayWallet;
 import com.dogpay.sdk.request.WalletConfig;
 import com.dogpay.sdk.request.WithdrawRequest;
 import com.dogpay.sdk.response.NotifyResponse;
+import com.dogpay.sdk.response.NotifyWithdrawCheckResponse;
 import com.util.RSAUtil;
 import com.util.StringUtil;
 
@@ -71,7 +72,7 @@ class ApplicationTests {
 //        2024-08-20T00:54:39.237337post body: {"sign":"","timestamp":"1724086479297","data":null,"code":0,"msg":"Insufficient pay wallet transaction fee."}
 
         /**
-         * ---------------------------- 充值或者提现通知回掉验证 ----------------------------
+         * ---------------------------- 接收充值或者提现通知回调验证处理 ----------------------------
          */
 
 //        TreeMap<String, String> params = new TreeMap<>();
@@ -91,11 +92,24 @@ class ApplicationTests {
 //        if (!params.containsKey("status") || StringUtil.isNullOrEmpty(params.get("status")))
 //            return NotifyResponse.fail("status empty");
 
-        // 验证签名
-//        if (!RSAUtil.verifyMd5(config.getPlatformPubKey(), RSAUtil.composeParams(params), params.get("sign")))
-//            return NotifyResponse.fail("sign verify fail");
+        // 常规通知验证签名 (true && false)
+//        Boolean status = wallet.dataSignVerify(config, params);
+
+        // true
+        // 业务正常逻辑处理
+
+        // 返回json
+//        NotifyResponse.ok("ok");
+
+        /**
+         * ---------------------------- 接收处理提现订单二次复核回调验证 ----------------------------
+         */
+        // 签名验证通过之后同时进行私钥数据签名
+//        NotifyWithdrawCheckResponse respone = wallet.withdrawalOrderCheck(config, params);
 
         // 业务正常逻辑处理
+
+        // 返回json respone
     }
 
 }

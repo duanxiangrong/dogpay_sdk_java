@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 import com.dogpay.sdk.request.WalletConfig;
 import com.dogpay.sdk.request.WithdrawRequest;
+import com.dogpay.sdk.response.NotifyWithdrawCheckResponse;
 import com.dogpay.sdk.response.WalletAddressResponse;
 import com.dogpay.sdk.response.WalletUserResponse;
 import com.google.gson.Gson;
@@ -87,6 +88,24 @@ public class DogPayWallet {
 
         String body = request("partner/UserWithdrawByOpenID", "POST", params, config);
         return body;
+    }
+
+    public Boolean dataSignVerify(WalletConfig config, TreeMap<String, String> params) {
+        if (!RSAUtil.verifyMd5(config.getPlatformPubKey(), RSAUtil.composeParams(params), params.get("sign"))) {
+            return false;
+        }
+        return true;
+    }
+
+    public NotifyWithdrawCheckResponse withdrawalOrderCheck(WalletConfig config, TreeMap<String, String> params) {
+        if (!RSAUtil.verifyMd5(config.getPlatformWithdrawPubKey(), RSAUtil.composeParams(params), params.get("sign"))) {
+            return NotifyWithdrawCheckResponse.fail("fail");
+        }
+
+        NotifyWithdrawCheckResponse response = NotifyWithdrawCheckResponse.ok(getClientSign(config, params));
+        response.setTimestamp(params.get("timestamp"));
+        response.setMsg("ok");
+        return response;
     }
 
 }
