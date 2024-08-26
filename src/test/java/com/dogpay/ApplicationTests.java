@@ -10,7 +10,7 @@ import com.dogpay.sdk.DogPayWallet;
 import com.dogpay.sdk.request.WalletConfig;
 import com.dogpay.sdk.request.WithdrawRequest;
 import com.dogpay.sdk.response.NotifyResponse;
-import com.dogpay.sdk.response.NotifyWithdrawCheckResponse;
+import com.google.gson.Gson;
 import com.util.RSAUtil;
 import com.util.StringUtil;
 
@@ -20,15 +20,13 @@ class ApplicationTests {
     @Test
     void contextLoads() {
 
-//        String servicePriKey = "xxxxx";
-//        String apiKey = "xxxxx";
-//        String apiSecret = "xxxx";
-//        String platformPubKey = "xxxxxx";
-//        String platformWithdrawPubKey = "";
-
-//        1.3.1. Production Environment
+//        String servicePriKey = "xxx";
+//        String apiKey = "xxx";
+//        String apiSecret = "xxx";
+//        String platformPubKey = "xxx";
+//        String platformWithdrawPubKey = "xxx";
 //        String platformUrl = "https://vapi.dogpay.ai/sdk/";
-//        1.3.2. Sandbox environment
+
 //        String platformUrl = " https://sandbox-api.privatex.io/sdk/";
 
 //        WalletConfig config = new WalletConfig(apiKey, apiSecret, platformPubKey, platformWithdrawPubKey, servicePriKey,
@@ -105,11 +103,17 @@ class ApplicationTests {
          * ---------------------------- 接收处理提现订单二次复核回调验证 ----------------------------
          */
         // 签名验证通过之后同时进行私钥数据签名
-//        NotifyWithdrawCheckResponse respone = wallet.withdrawalOrderCheck(config, params);
-
+//        params.put("amount", "xxxx");
+//        params.put("openId", "xxxx");
+//        params.put("safeCode", "xxxx");
+//        params.put("sign", "xxxx");
+//        params.put("timestamp", "xxx");
+//        params.put("toAddress", "xxx");
+//        params.put("tokenId", "4");
+//        String sign = wallet.withdrawalOrderCheck(config, params);
         // 业务正常逻辑处理
 
-        // 返回json respone
+        // 返回json
     }
 
 }
